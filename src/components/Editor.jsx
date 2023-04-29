@@ -2,7 +2,7 @@ import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 
-const Editor = () => {
+const Editor = ({code, setCode, handlesubmit, output}) => {
   return (
     <>
       <Box
@@ -14,16 +14,22 @@ const Editor = () => {
         <Box>
           <TextField
             sx={{
-              width: "60em",
-              "& .css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input": {
-                width: 100,
-              },
+              width: "60em"
             }}
             id="outlined-multiline-static"
             label="Code"
             multiline
             rows={10}
-            defaultValue="Default Value"
+            defaultValue='//online c++ compiler 
+            #include <iostream> 
+            
+            int main() { 
+              // Write C++ code here 
+              std::cout << "Hello world!";  
+              
+              return 0; 
+            }'
+            onChange = {(e)=>{setCode(e.target.value)}}
           />
         </Box>
         <Box mt={2}>
@@ -39,14 +45,26 @@ const Editor = () => {
               </Typography>
               <TextField
                 sx={{
-                  width: "25em",
-                  "& .css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input": {
-                    width: 100,
-                  },
+                  width: "20em",
                 }}
                 id="outlined-multiline-static"
                 multiline
                 rows={5}
+              />
+            </Box>
+            <Box mr={5}>
+            <Typography sx={{ fontWeight: 200, color: "grey" }}>
+                Output
+              </Typography>
+              <TextField
+                sx={{
+                  width: "20em",
+                }}
+                id="outlined-multiline-static"
+                multiline
+                rows={5}
+                value={output}
+                InputProps={{readOnly: true, }}
               />
             </Box>
             <Box>
@@ -58,6 +76,7 @@ const Editor = () => {
                       backgroundColor: "green",
                       "&:hover": { backgroundColor: "green" },
                     }}
+                    onClick={handlesubmit}
                   >
                     Run
                   </Button>
